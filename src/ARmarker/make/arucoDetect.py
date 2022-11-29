@@ -31,7 +31,9 @@ def findArucoMarkers(img, markerSize=6, totalMarker=250, draw=True):
         
 def activateCam():
     # turn on Cam
-    cam = cv2.VideoCapture(cv2.CAP_DSHOW + 0)
+    cam = cv2.VideoCapture(0)
+    cam.set(cv2.CAP_PROP_FRAME_WIDTH, 3840)
+    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
     # Exception: 
     if not cam.isOpened():
