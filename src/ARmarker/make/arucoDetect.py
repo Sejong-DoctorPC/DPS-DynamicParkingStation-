@@ -9,7 +9,8 @@ from cv2 import aruco
 # aruco marker detect function
 def findArucoMarkers(img, markerSize=6, totalMarker=250, draw=True):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    cv2.imshow("window_2", gray)
+    gray = 255 - gray
+    # cv2.imshow("window_2", gray)
     key = getattr(aruco, f"DICT_{markerSize}X{markerSize}_{totalMarker}")
     arucoDict = aruco.Dictionary_get(key)
     arucoParam = aruco.DetectorParameters_create()
@@ -25,12 +26,12 @@ def findArucoMarkers(img, markerSize=6, totalMarker=250, draw=True):
         index = 6 * i
         print(markers[index:index + 6])
     if draw:
-        aruco.drawDetectedMarkers(img, bboxs)
+        aruco.drawDetectedMarkers(gray, bboxs)
 
         
 def activateCam():
     # turn on Cam
-    cam = cv2.VideoCapture(0)
+    cam = cv2.VideoCapture(cv2.CAP_DSHOW + 0)
 
     # Exception: 
     if not cam.isOpened():
@@ -41,7 +42,7 @@ def activateCam():
         status, img = cam.read()
         findArucoMarkers(img)
         if status & toggle:
-            cv2.imshow("window_1", img)
+            cv2.imshow("window_1", 255 - img)
             pass
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
