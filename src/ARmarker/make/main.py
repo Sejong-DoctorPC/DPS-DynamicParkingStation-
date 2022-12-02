@@ -1,7 +1,11 @@
 import arucoDetect
 import cv2
+from flask import Flask
+from arucoDetect import markers
+from serial import Serial
+
+
+
 
 if __name__ == "__main__":
-    sector = [0] * 36
-    while (1):
-        for i in aru
+    

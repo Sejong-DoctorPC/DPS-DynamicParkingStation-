@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mlt
 import cv2
 from cv2 import aruco
+from flask import Flask
 
 # aruco marker detect function
 def findArucoMarkers(img, markerSize=6, totalMarker=250, draw=True):
@@ -15,50 +16,55 @@ def findArucoMarkers(img, markerSize=6, totalMarker=250, draw=True):
     arucoDict = aruco.Dictionary_get(key)
     arucoParam = aruco.DetectorParameters_create()
     bboxs, ids, rejected = aruco.detectMarkers(gray, arucoDict, parameters = arucoParam)
-    print(type(ids))
+    #print(type(ids))
     markers = [0] * 36
+    markers[2] = 1
     if ids is not None:
         ids = ids.tolist()
         for i in ids:
             markers[i[0] - 1] = 1
-        
-    for i in range(6):
-        index = 6 * i
-        print(markers[index:index + 6])
-    if draw:
-        aruco.drawDetectedMarkers(gray, bboxs)
+    # for i in range(6):
+    #     index = 6 * i
+    #     print(markers[index:index + 6])
+    # if draw:
+    #     aruco.drawDetectedMarkers(gray, bboxs)
 
         
 def activateCam():
-    # turn on Cam
-    cam = cv2.VideoCapture(0)
-    cam.set(cv2.CAP_PROP_FRAME_WIDTH, 3840)
-    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
-
-    # Exception: 
-    if not cam.isOpened():
-        print("Could not open webcam")
-        exit()
-
-    while cam.isOpened():
-        status, img = cam.read()
-        findArucoMarkers(img)
-        if status & toggle:
-            cv2.imshow("window_1", 255 - img)
-            pass
-
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+    status, img = cam.read()
+    findArucoMarkers(img)
+    if status:
+        #cv2.imshow("window_1", 255 - img)
+        pass
     # turn off Cam
     cam.release()
     cv2.destroyAllWindows()
 
-# main
+
+
+# turn on Cam
+cam = cv2.VideoCapture(0)
+cam.set(cv2.CAP_PROP_FRAME_WIDTH, 3840)
+cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+
+# Exception: 
+if not cam.isOpened():
+    print("Could not open webcam")
+    exit()
+
+# Flask
 markers = [0] * 36
-toggle = 0
+cnt = 0
+app = Flask(__name__)
+@app.route('/')
+def home():
+    status, img = cam.read()
+    findArucoMarkers(img)
+    return markers
+
+    
 if __name__ == "__main__":
-    toggle = 1
-activateCam()
+    app.run(debug=True)
 
 
 
