@@ -1,4 +1,4 @@
-# ParkingStation
+# DPS - DynamicParkingStation
 > 공간을 새롭게 정의하는 USPACE 주차장의 데모 모델 DPS(Dynamic Parking Station)의 레포지토리 입니다.
 
 USPACE는 스마트 주차장을 목적으로 공간을 더욱 동적으로 사용할수 있도록 하는 솔루션입니다. DPS는 USPACE의 기능을 시현 가능한 데모 모델으로 6X6의 주차 구역을 제작하여 차량의 출입, 주차, 반응 등의 환경을 제어합니다. 
