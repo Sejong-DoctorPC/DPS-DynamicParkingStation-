@@ -19,3 +19,8 @@ USPACE는 스마트 주차장을 목적으로 공간을 더욱 동적으로 사�
 - 차량 번화판 인식
 - Object Detection, model YOLO v4
 - NeoPixel sector 피드백
+
+
+<img width="500" alt="KakaoTalk_Photo_2022-12-02-16-03-37-16" src="https://user-images.githubusercontent.com/54783158/205234989-7b6dfe14-b559-4444-8722-831b2d0ccc53.png">
+<img width="500" alt="KakaoTalk_Photo_2022-12-02-16-03-37-19" src="https://user-images.githubusercontent.com/54783158/205235007-efd1039b-7c26-4e1c-826a-729160c08402.png">
+<img width="500" alt="KakaoTalk_Photo_2022-12-02-16-03-37-20" src="https://user-images.githubusercontent.com/54783158/205235081-20008375-46eb-4dc3-8f71-f776980d7a12.png">
