@@ -2,7 +2,7 @@ import copy
 
 markers = [0]*36
 markers_copy = markers.copy()
-markers[6] = 1
+#markers[6] = 1
 if markers == markers_copy:
     print("same")
 else :

@@ -7,6 +7,7 @@ sector_id={"tag":"aruco"}
 init_sector = {"{}".format(key): {"place":1, "carNumber": 0, "disabled": 0} for key in range(1, 37)}
 init_sector[str(7)]["place"] = 0
 print(init_sector['7']["place"])
+
 newSector = {"$set":init_sector}
 def pymongo_script():
     uri = "mongodb+srv://yonghyun:47529722@diyparking.ddqzn68.mongodb.net/?retryWrites=true&w=majority" # USPACE
