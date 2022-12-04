@@ -19,7 +19,8 @@ USPACE는 스마트 주차장을 목적으로 공간을 더욱 동적으로 사�
 ## 적용기술
 
 - OpenCV Aruco Marker
-- 차량 번화판 인식
+- protocol : mongodb, Serial
+- 차량 번호판 인식
 - Object Detection, model YOLO v4
 - NeoPixel sector 피드백
 
