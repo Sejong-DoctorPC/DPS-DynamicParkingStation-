@@ -94,7 +94,7 @@ int serial_input()
     return (int)cmd;
   }
 }
-}
+
 
 void mode(int n)
 {
