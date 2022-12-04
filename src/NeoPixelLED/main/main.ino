@@ -59,7 +59,9 @@ void bright_heliport(); //MODE 3
 
 // mode
 void mode(int n);
+
 // serial
+int serial_input();
 
 
 /* ------------ main ------------ */
@@ -79,9 +81,19 @@ void loop()
 /* ------------ function ------------ */
 void led_main()
 {
-  int inNum = Serial.parseInt();
-  Serial.println(inNum);
+  //int inNum = Serial.parseInt();
+  //Serial.println(inNum);
+  inNUM = serial_input();
   mode(inNum);
+}
+int serial_input()
+{
+  char cmd;
+  if(Serial.available()){
+    cmd = Serial.read(); 
+    return (int)cmd;
+  }
+}
 }
 
 void mode(int n)
@@ -96,7 +108,7 @@ void mode(int n)
   }
   else if (n == 3){
     bright_heliport();
-    delay(310000);
+    delay(10000);
   }
   
   bright_off();
@@ -283,8 +295,8 @@ void bright_heliport() //MODE 3
   //H 표시 가로선
   colorWipeScope(selector.Color(0,0,100), 0,3,6,12);
   //H 표시 세로선 
-  colorWipeScope(selector.Color(0,0,100), 0,11,5,25);
-  colorWipeScope(selector.Color(0,0,100),0,9,5,25);
+  colorWipeScope(selector.Color(0,0,100), 0,11,10,20);
+  colorWipeScope(selector.Color(0,0,100),0,9,10,20);
 }
 
 /*------------- colorwipe ---------------*/
