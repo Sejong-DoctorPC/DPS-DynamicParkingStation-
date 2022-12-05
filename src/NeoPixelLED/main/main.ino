@@ -59,6 +59,7 @@ void bright_heliport(); //MODE 3
 
 // mode
 void mode(int n);
+void example();
 
 // serial
 int serial_input();
@@ -83,8 +84,9 @@ void led_main()
 {
   //int inNum = Serial.parseInt();
   //Serial.println(inNum);
-  inNUM = serial_input();
-  mode(inNum);
+  //inNUM = serial_input();
+  //mode(inNum);
+  example();
 }
 int serial_input()
 {
@@ -95,7 +97,24 @@ int serial_input()
   }
 }
 
+void example()
+{
+  // mode 0
+  bright_all();
+  delay(10000);
 
+  // mode 1
+  bright_allsector();
+  delay(10000);
+  
+  // mode 2
+  bright_all2();
+  delay(10000);
+  
+  // mode 3
+  bright_heliport();
+   delay(10000);
+}
 void mode(int n)
 {
   if (n == 1) {
