@@ -12,28 +12,35 @@ import pymongo
 
 
 # data
-markers = [0] * 36
-markers_copy = [1] * 36
-sector = {"{}".format(key):{"place":0, "carNumber": 0, "disabled": 0} for key in range(1, 37)}
-sector["tag"] = "aruco"
-sector_id={"tag":"aruco"}
+markers = [0] * 37
+markers_copy = [1] * 37
+zone_id = [i for i in range(1, 37)]
 #sector_id={"_id":"638bd366ff6bd52512624bf5"}
-newSector = {"$set":{format(key):1 for key in range(1, 37)}}
 
 # mongoDB
+def zero2one(n):
+    if n == 1:
+        return 0
+    elif n == 0:
+        return 1
 def pymongo_script():
     # global variable
-    global sector_id
-    global sector
-    global newSector
-
+    global zone_id
 
     uri = "mongodb+srv://yonghyun:47529722@diyparking.ddqzn68.mongodb.net/?retryWrites=true&w=majority" # USPACE
     client = pymongo.MongoClient(uri)
     db = client.get_database('test')
     #print(db)
-    sectors = db.sectors
-    sectors.update_one(sector_id, newSector)
+    parkings = db.parking
+    for i in zone_id:
+        parkings.update_one(
+            {"zone": i}, 
+            {"$set":
+                {
+                    "state": zero2one(markers[i-1]),
+                }
+            }
+        )
 
 # aruco marker detect function
 def findArucoMarkers(img, markerSize=6, totalMarker=250, draw=True):
@@ -55,16 +62,13 @@ def findArucoMarkers(img, markerSize=6, totalMarker=250, draw=True):
     if ids is not None:
 
         # init data
-        markers = [0] * 36
-        init_sector = {"{}".format(key): {"place":1, "carNumber": 0, "disabled": 0} for key in range(1, 37)}
+        markers = [0] * 37
         ids = ids.tolist()
 
         # save data
         for i in ids:
             markers[i[0] - 1] = 1
-            init_sector[str(i[0])]["place"] = 0
-        newSector["$set"] = init_sector
-        
+
         # transport db
         if markers != markers_copy: # someting change in array
             print("different")

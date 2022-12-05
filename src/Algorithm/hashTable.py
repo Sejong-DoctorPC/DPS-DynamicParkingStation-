@@ -43,7 +43,7 @@ print(example[:2]+example[-4:])
 examples = ['75공3014', '82공3015', '50공2208', '34공2157', '63공1000', '22공7002', '75공9044', '33공9996', '43공2777', '53공1051']
 # Test Code
 h_table = HashTable(36)
-for example in examples
+for example in examples:
     h_table.save(example[:2]+example[-4:], example)
 
 # for i in range(36):
