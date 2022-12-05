@@ -102,18 +102,22 @@ void example()
   // mode 0
   bright_all();
   delay(10000);
+  bright_off();
 
   // mode 1
   bright_allsector();
   delay(10000);
+  bright_off();
   
   // mode 2
   bright_all2();
   delay(10000);
+  bright_off();
   
   // mode 3
   bright_heliport();
-   delay(10000);
+  delay(10000);
+  bright_off();
 }
 void mode(int n)
 {

@@ -1,4 +1,11 @@
-char cmd;
+String cmd;
+
+typedef struct protocol{
+  int mode;
+  int quit;
+  int light_sector;
+}Protocol;
+Protocol P;
 
 void setup() {
   
@@ -7,18 +14,10 @@ void setup() {
 }
 
 void loop() {
-
+  
   // 컴퓨터로부터 시리얼 통신이 전송되면, 한줄씩 읽어와서 cmd 변수에 입력
   if(Serial.available()){
-    cmd = Serial.read(); 
-
-    if(cmd=='a'){
-      Serial.println("아두이노: a");
-      delay(100);
-    }
-    else if(cmd=='b'){
-      Serial.println("아두이노: b");
-      delay(100);
-    }
+    cmd = Serial.readString(); 
+    Serial.println(cmd);
   }
 }
